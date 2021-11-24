@@ -33,17 +33,18 @@ void back(int cnt)
             }
             cout<<'\n';
         }
+        exit(0);
     }
-    for(int j=cnt; j<v.size(); j++)
+    for(int i=1; i<=9; i++)
     {
-        for(int i=1; i<=9; i++)
+        if(check(v[cnt].first, v[cnt].second, i))
         {
-            if(check(v[j].first, v[j].second, i))
-            {
-                void back(cnt+1);
-            }
-        }   
-    }
+            board[v[cnt].first][v[cnt].second]=i;
+            back(cnt+1);
+            board[v[cnt].first][v[cnt].second]=0;
+        }
+    }   
+    
     
 }
 bool check(int x, int y, int c)
@@ -52,8 +53,18 @@ bool check(int x, int y, int c)
     {
         if(board[i][y]==c)
             return false;
-        if(board[x][y]==c)
+        if(board[x][i]==c)
             return false;
     }
-    for(int i=)
+    x=(x/3)*3;
+    y=(y/3)*3;
+    for(int i=0; i<3; i++)
+    {
+        for(int j=0; j<3; j++)
+        {
+            if(board[x+i][y+j]==c)
+                return false;
+        }
+    }
+    return true;
 }
